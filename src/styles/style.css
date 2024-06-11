@@ -1,0 +1,157 @@
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+}
+ 
+.dark{
+  background-color: #333;
+}
+html, body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  .head-app{
+    background: #FCEBAC;
+    padding: 16px;
+    color: rgb(12, 12, 12);
+    
+    text-align: center;
+}
+.button-primary{
+  margin: 20px;
+  background-color: #FCEBAC;
+  font-size: small;
+
+  color: black;
+  border: solid 1px black;
+  padding: 10px;
+  border-radius: 10px;
+}
+.form-input{
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  width: 90%;
+  padding: 8px;
+  margin: 8px 0;
+}  
+
+.login-page h2, .register-page h2 {
+  font-weight: normal;
+}
+.login-page{ 
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-top: 10%;
+
+  /* max-width: 50%; */
+}
+
+.login-input, .register-input, .contact-input {
+  margin-top: 16px;
+}
+
+.login-input input, .register-input input, .contact-input input {
+  display: block;
+  padding: 16px;
+  width: 100%;
+  margin: 8px 0;
+  font-size: 24px;
+  background-color: transparent;
+  border: 2px dashed black;
+  border-radius: 8px;
+}
+/* .head-app{
+  padding: 16px;
+  color: rgb(12, 12, 12);
+  
+  text-align: right;
+} */
+.head-app {
+  background: #FCEBAC;
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+  justify-content: space-between; /* Distribute space between items */
+  padding: 10px; /* Optional: Add some padding */
+}
+.link{
+  text-decoration: none; /* Menghilangkan dekorasi teks (misalnya garis bawah) */
+  color: inherit;
+  margin: 20px;
+}
+.container-thread-add {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+.category-button{
+  background-color: rgb(124, 248, 145);
+  font-size: small;
+  color: rgb(8, 8, 8);
+  border: solid 1px rgb(5, 4, 4);
+  padding: 5px;
+  border-radius: 5px;
+}
+.container-note p {
+  word-wrap: break-word; /* atau word-break: break-all; */
+
+}
+.container-thread{
+  margin: 10px;
+  padding: 10px;
+  background-color: white;
+  border: solid black;
+  border-radius: 10px;
+  width: 450px;
+  box-sizing: border-box; /* Memastikan padding tidak menambah lebar kotak */
+}
+.footer-note{
+  display: flex;
+  align-items : center;
+  text-align: center;
+}
+.box{
+  flex: 1; /* Ukuran yang sama untuk setiap flexbox */
+}
+.container-thread-list{
+  display: flex;
+  flex-wrap: wrap; /* Mengatur wrap agar bila melebihi 4 kotak akan pindah ke baris berikutnya */
+
+}
+.img-round {
+  border-radius: 50%;
+  width: 100px;  /* Adjust the width and height to ensure the image is square */
+  height: 100px;
+  object-fit: cover;  /* Ensures the image covers the entire area */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column; /* Keep name and postedAt in a column */
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+.thread-detail{
+  border: black solid;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+}
+.thread-reply{
+  border: black solid;
+  border-radius: 20px;
+  margin: 40px;
+  padding: 20px;
+}
