@@ -1,3 +1,8 @@
+/**
+ * testing secenario for thunk function asyncPopulateUsersAndThreads
+ * should dispatch actions correctly when data fetching succeeds
+ * should dispatch actions when data fetching fails
+ */
 import {
   describe,
   beforeEach,

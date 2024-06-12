@@ -1,4 +1,5 @@
 /**
+ * testing secenario for asyncPreloadProcess thunk
  * should dispatch actions correctly when preload process succeeds
  * should dispatch actions correctly when preload process fails
  */
