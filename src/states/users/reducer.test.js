@@ -1,3 +1,9 @@
+/**
+ * testing secenario for user reduccer
+ * should return the initial state when no action is provided
+ * should return the users when receiving RECEIVE_USERS action
+ * should return current state when action type is unknown
+ */
 import { describe, it, expect } from 'vitest';
 import usersReducer from './reducer';
 import { ActionType } from './action';
