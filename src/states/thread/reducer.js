@@ -7,20 +7,6 @@ function threadsReducer(threads = [], action = {}) {
       return action.payload.threads;
     case ActionType.ADD_THREAD:
       return [action.payload.thread, ...threads];
-    case ActionType.TOGGLE_LIKE_THREAD:
-      return threads.map((thread) => {
-        if (thread.id === action.payload.threadId) {
-          const upVoteBy = Array.isArray(thread.upVoteBy) ? thread.upVoteBy : [];
-
-          return {
-            ...thread,
-            upVoteBy: upVoteBy.includes(action.payload.ownerId)
-              ? upVoteBy.filter((id) => id !== action.payload.ownerId)
-              : upVoteBy.concat([action.payload.ownerId]),
-          };
-        }
-        return thread;
-      });
     default:
       return threads;
   }

@@ -26,16 +26,6 @@ function addThreadActionCreator(thread) {
   };
 }
 
-function toggleLikeThreadActionCreator({ threadId, ownerId }) {
-  return {
-    type: ActionType.TOGGLE_LIKE_THREAD,
-    payload: {
-      threadId,
-      ownerId,
-    },
-  };
-}
-
 function asyncAddThread({ title, body, category = '' }) {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -51,27 +41,9 @@ function asyncAddThread({ title, body, category = '' }) {
   };
 }
 
-function asyncToggleLikeThread(threadId) {
-  return async (dispatch, getState) => {
-    dispatch(showLoading());
-    const { authUser } = getState();
-    dispatch(toggleLikeThreadActionCreator({ threadId, ownerId: authUser }));
-    try {
-      await api.toggleLikeThread(threadId, authUser);
-    } catch (error) {
-      alert(error.message);
-      // Revert the like/dislike action in case of an error
-      dispatch(toggleLikeThreadActionCreator({ threadId, ownerId: authUser }));
-    }
-    dispatch(hideLoading());
-  };
-}
-
 export {
   ActionType,
   receiveThreadActionCreator,
   addThreadActionCreator,
-  toggleLikeThreadActionCreator,
   asyncAddThread,
-  asyncToggleLikeThread,
 };

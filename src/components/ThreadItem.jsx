@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import {
-  BiLike, BiSolidLike,
-} from 'react-icons/bi';
+
 import postedAt from '../utils';
 
 function ThreadItem({
@@ -12,19 +10,10 @@ function ThreadItem({
   body = '',
   category = '',
   createdAt = '',
-  upVotesBy = [],
-  authUser = '',
   totalComments = '',
-  like = null,
   user = '',
 }) {
   const navigate = useNavigate();
-  const isThreadLiked = upVotesBy.includes(authUser);
-
-  const onLikeClick = (event) => {
-    event.stopPropagation();
-    like(id);
-  };
 
   const onTalkClick = () => {
     navigate(`/thread/${id}`);
@@ -60,19 +49,6 @@ function ThreadItem({
         </h3>
         <p>{body}</p>
       </div>
-      <div className="footer-note">
-        {
-              like && (
-                <>
-                  <button type="button" aria-label="like" onClick={onLikeClick}>
-                    { isThreadLiked ? <BiSolidLike /> : <BiLike /> }
-                  </button>
-                  {' '}
-                  {upVotesBy.length}
-                </>
-              )
-            }
-      </div>
       <div>
         <p>
           <b>
@@ -92,7 +68,6 @@ const threadItemShape = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   authUser: PropTypes.string.isRequired,
   ownerId: PropTypes.string.isRequired,
 };
