@@ -6,7 +6,7 @@
  * should display alert when password is empty
  * should display alert when username is empty
  */
-describe('LoginPage', () => {
+describe('Login spec', () => {
   beforeEach(() => {
     cy.visit('http://localhost:5173/');
   });
@@ -22,7 +22,7 @@ describe('LoginPage', () => {
     cy.url().should('include', '/'); // Mengasumsikan bahwa setelah login, pengguna diarahkan ke halaman dashboard
     // memverifikasi bahwa elemen yang berada di homepage ditampilkan
     cy.get('nav').contains(/^Home$/).should('be.visible');
-    cy.get('button').contains('Sign out').should('be.visible');
+    cy.get('button').contains(/^Sign out$/).should('be.visible');
   });
 
   it('should display login page correctly', () => {
