@@ -1,0 +1,45 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RegisterInput component > renders correctly 1`] = `
+<div>
+  <div
+    class="login-content"
+  >
+    <form>
+      <input
+        class="form-input"
+        placeholder="Name"
+        type="text"
+        value=""
+      />
+      <input
+        class="form-input"
+        placeholder="Username"
+        type="text"
+        value=""
+      />
+      <input
+        class="form-input"
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+      <button
+        class="button-primary"
+        type="button"
+      >
+        Register
+      </button>
+    </form>
+    <p>
+      Already have an account?
+       
+      <a
+        href="/"
+      >
+        Login
+      </a>
+    </p>
+  </div>
+</div>
+`;

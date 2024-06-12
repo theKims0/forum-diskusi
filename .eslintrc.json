@@ -24,6 +24,7 @@
         "eol-last": "off",
         "linebreak-style": "off",  // Nonaktifkan aturan linebreak-style
         "no-alert": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "react/jsx-props-no-spreading": "off"// Disable the rule that forbids prop spreading
     }
 }

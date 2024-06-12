@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CommentItem component > renders correctly 1`] = `
+<div>
+  <section
+    class="thread-reply"
+  >
+    <header
+      class="footer-note"
+    >
+      <img
+        alt="[object Object]"
+        class="img-round"
+        src="https://example.com/avatar.jpg"
+      />
+      <div
+        class="user-info"
+      >
+        <p>
+          @
+          user123
+        </p>
+        <span>
+          John Doe
+        </span>
+      </div>
+    </header>
+    <article>
+      <p>
+        This is a comment
+      </p>
+    </article>
+    <footer
+      class="footer-note"
+    />
+    <p>
+      Posted at 2024-06-12T12:00:00Z
+    </p>
+  </section>
+</div>
+`;

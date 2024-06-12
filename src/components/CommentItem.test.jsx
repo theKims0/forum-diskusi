@@ -1,3 +1,10 @@
+/**
+ * testing secenario commponent comment item
+ * should display the content correctly
+ * should display the owner information correctly
+ * should display the createdAt date correctly
+ * renders correctly
+ */
 import React from 'react';
 import {
   describe, it, expect, vi,
@@ -9,42 +16,55 @@ import CommentItem from './CommentItem';
 // Extend Vitest's expect with jest-dom matchers
 expect.extend(matchers);
 
-// Mock the postedAt function
+// Mocking the postedAt function
 vi.mock('../utils', () => ({
   default: (date) => `Posted at ${date}`,
 }));
 
 describe('CommentItem component', () => {
-  const mockOwner = {
+  const owner = {
     id: 'user123',
     name: 'John Doe',
     avatar: 'https://example.com/avatar.jpg',
   };
 
-  it('renders correctly with provided props', () => {
-    const mockContent = 'This is a comment';
-    const mockCreatedAt = '2023-06-11';
+  const commentProps = {
+    content: 'This is a comment',
+    createdAt: '2024-06-12T12:00:00Z',
+    owner,
+  };
 
-    render(
-      <CommentItem
-        content={mockContent}
-        createdAt={mockCreatedAt}
-        owner={mockOwner}
-      />,
-    );
+  it('should display the content correctly', () => {
+    // Arrange
+    render(<CommentItem {...commentProps} />);
 
-    // Check if the owner's avatar is rendered
-    const avatarImg = screen.getByAltText(mockOwner);
-    expect(avatarImg).toHaveAttribute('src', mockOwner.avatar);
+    // Assert
+    expect(screen.getByText('This is a comment')).toBeInTheDocument();
+  });
 
-    // Check if the owner's id and name are rendered
-    expect(screen.getByText(`@${mockOwner.id}`)).toBeInTheDocument();
-    expect(screen.getByText(mockOwner.name)).toBeInTheDocument();
+  it('should display the owner information correctly', () => {
+    // Arrange
+    render(<CommentItem {...commentProps} />);
 
-    // Check if the content is rendered
-    expect(screen.getByText(mockContent)).toBeInTheDocument();
+    // Assert
+    expect(screen.getByText('@user123')).toBeInTheDocument();
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByAltText(owner)).toBeInTheDocument();
+  });
 
-    // Check if the createdAt is rendered correctly by postedAt
-    expect(screen.getByText(`Posted at ${mockCreatedAt}`)).toBeInTheDocument();
+  it('should display the createdAt date correctly', () => {
+    // Arrange
+    render(<CommentItem {...commentProps} />);
+
+    // Assert
+    expect(screen.getByText('Posted at 2024-06-12T12:00:00Z')).toBeInTheDocument();
+  });
+
+  it('renders correctly', () => {
+    // Arrange
+    const { container } = render(<CommentItem {...commentProps} />);
+
+    // Assert
+    expect(container).toMatchSnapshot();
   });
 });
