@@ -14,7 +14,7 @@ function LoginPage() {
     <div className="login-page">
       <h1 className="poppins-bold">Login</h1>
       <h2>
-        Lets Discuss with everyone
+        Lets Discuss with everyone adddd
       </h2>
 
       <LoginInput login={onLogin} />
