@@ -3,12 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ThreadItem, { threadItemShape } from './ThreadItem';
 
-function ThreadList({ threads, like, dislike }) {
+function ThreadList({ threads, like }) {
   return (
     <div className="container-thread-list">
       {
          threads.map((thread) => (
-           <ThreadItem key={thread.id} {...thread} like={like} dislike={dislike} />
+           <ThreadItem key={thread.id} {...thread} like={like} />
 
          ))
       }
@@ -18,7 +18,6 @@ function ThreadList({ threads, like, dislike }) {
 
 ThreadList.propTypes = {
   threads: PropTypes.arrayOf(PropTypes.shape(threadItemShape)).isRequired,
-  dislike: PropTypes.func.isRequired,
   like: PropTypes.func.isRequired,
 };
 

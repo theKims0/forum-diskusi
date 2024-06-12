@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ThreadList from '../components/ThreadList';
 import asyncPopulateUsersAndThreads from '../states/shared/action';
-import { asyncToggleLikeThread, asyncToogleDislikeThread } from '../states/thread/action';
+import { asyncToggleLikeThread } from '../states/thread/action';
 
 function HomePage() {
   const { users = [], authUser } = useSelector((state) => state);
@@ -17,10 +17,6 @@ function HomePage() {
     dispatch(asyncToggleLikeThread(id));
   };
 
-  const onDislike = (id) => {
-    dispatch(asyncToogleDislikeThread(id));
-  };
-
   const threadList = threads.map((thread) => ({
     ...thread,
     user: thread.ownerId && users.find((user) => user.id === thread.ownerId),
@@ -29,7 +25,7 @@ function HomePage() {
 
   return (
     <section className="home-page">
-      <ThreadList threads={threadList} like={onLike} dislike={onDislike} />
+      <ThreadList threads={threadList} like={onLike} />
     </section>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import {
-  BiLike, BiSolidLike, BiDislike, BiSolidDislike,
+  BiLike, BiSolidLike,
 } from 'react-icons/bi';
 import postedAt from '../utils';
 
@@ -13,16 +13,13 @@ function ThreadItem({
   category = '',
   createdAt = '',
   upVotesBy = [],
-  downVotesBy = [],
   authUser = '',
   totalComments = '',
   like = null,
-  dislike = null,
   user = '',
 }) {
   const navigate = useNavigate();
   const isThreadLiked = upVotesBy.includes(authUser);
-  const isThreadDisliked = downVotesBy.includes(authUser);
 
   const onLikeClick = (event) => {
     event.stopPropagation();
@@ -75,17 +72,6 @@ function ThreadItem({
                 </>
               )
             }
-        {
-            dislike && (
-              <>
-                <button type="button" aria-label="like" onClick={onLikeClick}>
-                  { isThreadDisliked ? <BiSolidDislike /> : <BiDislike /> }
-                </button>
-                {' '}
-                {downVotesBy.length}
-              </>
-            )
-          }
       </div>
       <div>
         <p>
@@ -107,7 +93,6 @@ const threadItemShape = {
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   authUser: PropTypes.string.isRequired,
   ownerId: PropTypes.string.isRequired,
 };
