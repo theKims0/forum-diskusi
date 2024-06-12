@@ -1,46 +1,124 @@
+/**
+ * testing secenario for component register input
+ * should handle name typing correctly
+ * should handle email typing correctly
+ * should handle password typing correctly
+ * should call register function when register button is clicked
+ * renders correctly
+ * should have a link to login
+ */
 import React from 'react';
 import {
   describe, it, expect, vi,
 } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import matchers from '@testing-library/jest-dom/matchers';
 import { BrowserRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
 import RegisterInput from './RegisterInput';
 
-describe('RegisterInput component', () => {
-  it('renders correctly and handles input changes and register', async () => {
-    const registerMock = vi.fn();
+// Extend Vitest's expect with jest-dom matchers
+expect.extend(matchers);
 
+describe('RegisterInput component', () => {
+  it('should handle name typing correctly', async () => {
+    // Arrange
     render(
       <BrowserRouter>
-        <RegisterInput register={registerMock} />
+        <RegisterInput register={() => {}} />
+      </BrowserRouter>,
+    );
+    const nameInput = await screen.getByPlaceholderText('Name');
+
+    // Action
+    await userEvent.type(nameInput, 'John Doe');
+
+    // Assert
+    expect(nameInput).toHaveValue('John Doe');
+  });
+
+  it('should handle email typing correctly', async () => {
+    // Arrange
+    render(
+      <BrowserRouter>
+        <RegisterInput register={() => {}} />
+      </BrowserRouter>,
+    );
+    const emailInput = await screen.getByPlaceholderText('Username');
+
+    // Action
+    await userEvent.type(emailInput, 'johndoe@example.com');
+
+    // Assert
+    expect(emailInput).toHaveValue('johndoe@example.com');
+  });
+
+  it('should handle password typing correctly', async () => {
+    // Arrange
+    render(
+      <BrowserRouter>
+        <RegisterInput register={() => {}} />
+      </BrowserRouter>,
+    );
+    const passwordInput = await screen.getByPlaceholderText('Password');
+
+    // Action
+    await userEvent.type(passwordInput, 'password123');
+
+    // Assert
+    expect(passwordInput).toHaveValue('password123');
+  });
+
+  it('should call register function when register button is clicked', async () => {
+    // Arrange
+    const mockRegister = vi.fn();
+    render(
+      <BrowserRouter>
+        <RegisterInput register={mockRegister} />
+      </BrowserRouter>,
+    );
+    const nameInput = await screen.getByPlaceholderText('Name');
+    await userEvent.type(nameInput, 'John Doe');
+    const emailInput = await screen.getByPlaceholderText('Username');
+    await userEvent.type(emailInput, 'johndoe@example.com');
+    const passwordInput = await screen.getByPlaceholderText('Password');
+    await userEvent.type(passwordInput, 'password123');
+    const registerButton = await screen.getByRole('button', { name: 'Register' });
+
+    // Action
+    await userEvent.click(registerButton);
+
+    // Assert
+    expect(mockRegister).toHaveBeenCalledWith({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: 'password123',
+    });
+  });
+
+  it('renders correctly', () => {
+    // Arrange
+    const { container } = render(
+      <BrowserRouter>
+        <RegisterInput register={() => {}} />
       </BrowserRouter>,
     );
 
-    const nameInput = screen.getByPlaceholderText('Name');
-    const emailInput = screen.getByPlaceholderText('Username');
-    const passwordInput = screen.getByPlaceholderText('Password');
-    const registerButton = screen.getByRole('button', { name: /register/i });
+    // Assert
+    expect(container).toMatchSnapshot();
+  });
 
-    // Simulate user input
-    await userEvent.type(nameInput, 'John Doe');
-    await userEvent.type(emailInput, 'johndoe@example.com');
-    await userEvent.type(passwordInput, 'password123');
+  it('should have a link to login', async () => {
+    // Arrange
+    render(
+      <BrowserRouter>
+        <RegisterInput register={() => {}} />
+      </BrowserRouter>,
+    );
 
-    // Verify inputs have the correct values
-    expect(nameInput).toHaveValue('John Doe');
-    expect(emailInput).toHaveValue('johndoe@example.com');
-    expect(passwordInput).toHaveValue('password123');
-
-    // Simulate button click
-    fireEvent.click(registerButton);
-
-    // Verify the register function is called with the correct arguments
-    expect(registerMock).toHaveBeenCalledWith({ name: 'John Doe', email: 'johndoe@example.com', password: 'password123' });
-
-    // Verify the existence of the login link
-    const loginLink = screen.getByRole('link', { name: /login/i });
+    // Assert
+    const loginLink = await screen.getByRole('link', { name: /login/i });
     expect(loginLink).toBeInTheDocument();
+    expect(loginLink).toHaveAttribute('href', '/');
   });
 });
