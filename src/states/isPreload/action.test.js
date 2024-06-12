@@ -1,3 +1,7 @@
+/**
+ * should dispatch actions correctly when preload process succeeds
+ * should dispatch actions correctly when preload process fails
+ */
 import {
   describe,
   beforeEach,

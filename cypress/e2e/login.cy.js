@@ -1,17 +1,28 @@
+/**
+ * secenario testing e2e for login
+ * should log in with valid credentials
+ * should display login page correctly
+ * should display error with invalid credentials
+ * should display alert when password is empty
+ * should display alert when username is empty
+ */
 describe('LoginPage', () => {
   beforeEach(() => {
     cy.visit('http://localhost:5173/');
   });
   it('should log in with valid credentials', () => {
     // Mengisi formulir login dengan kredensial yang valid
-    cy.get('input[type="text"]').type('example@email.com');
-    cy.get('input[type="password"]').type('password');
+    cy.get('input[type="text"]').type('abdul11@gmail.com');
+    cy.get('input[type="password"]').type('12345678');
 
     // // Mengklik tombol login
     cy.get('button').contains('Login').click();
 
     // // Memeriksa apakah pengguna telah berhasil login
     cy.url().should('include', '/'); // Mengasumsikan bahwa setelah login, pengguna diarahkan ke halaman dashboard
+    // memverifikasi bahwa elemen yang berada di homepage ditampilkan
+    cy.get('nav').contains(/^Home$/).should('be.visible');
+    cy.get('button').contains('Sign out').should('be.visible');
   });
 
   it('should display login page correctly', () => {
@@ -60,14 +71,4 @@ describe('LoginPage', () => {
       expect(str).to.equal('"email" is not allowed to be empty');
     });
   });
-
-  // it('should navigate to registration page', () => {
-  //   cy.visit('/login'); // Mengunjungi halaman login
-
-  //   // Mengklik tautan "Register here"
-  //   cy.contains('Register here').click();
-
-  //   // Memeriksa apakah pengguna diarahkan ke halaman pendaftaran
-  //   cy.url().should('include', '/register');
-  // });
 });
